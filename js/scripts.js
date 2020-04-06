@@ -1,10 +1,21 @@
 function ToDoList(){
    this.tasks= [];
+   this.currentId=0;
   
 }
 
 ToDoList.prototype.addList = function(task){
+   task.id=this.assignId();
    this.tasks.push(task);
+   
+}
+
+ToDoList.prototype.assignId= function(){
+   this.currentId += 1;
+   return this.currentId;
+}
+
+ToDoList.prototype.deleteList = function(id){
    
 }
 
@@ -19,6 +30,9 @@ var task2 = new Task("wash clothes");
 
 
 
+function taskDone(id){
+ alert("Task has completed");
+}
 
 var todoList = new ToDoList();
 
@@ -31,11 +45,12 @@ $(document).ready(function(){
        todoList.addList(task1);
        $("#outPut").html('');
        for(var i=0;i<todoList.tasks.length;i++){
+          var inputId = todoList.tasks[i].id;
          var list = $("#outPut");
-         $("<li></li>").html(todoList.tasks[i].description).appendTo(list);
+         $("<li></li>").html("<input type='checkbox' onclick='taskDone(inputId)'>"+todoList.tasks[i].description).appendTo(list);
          $("input#task").val('');
        }
-       
+      
       });
    
 });
