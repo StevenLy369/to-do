@@ -27,29 +27,20 @@ $(document).ready(function(){
    $("#inputForm").submit(function(event){
       event.preventDefault();
       var inputTask = $("input#task").val();
-      console.log("inputTask   "+inputTask)
-      // var todoList = new ToDoList();
        var task1 = new Task(inputTask);
        todoList.addList(task1);
-       console.log(todoList.tasks[0].description);
-       //$("#outPut").text();
-       var list = $("#outPut");
-        $("<li></li>").html(todoList.tasks[0].description).appendTo(list);
-    
-      
-      // console.log(task1)
-      // console.log( "--->"+todoList.addList(task1));
-
-      
-      
-      
-      
-      
-   });
+       $("#outPut").html('');
+       for(var i=0;i<todoList.tasks.length;i++){
+         var list = $("#outPut");
+         $("<li></li>").html(todoList.tasks[i].description).appendTo(list);
+         $("input#task").val('');
+       }
+       
+      });
    
 });
 
-
+//console.log(todoList.tasks[0].description);
 
 
 
